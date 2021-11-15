@@ -24,9 +24,9 @@ enum
 {
 	kSSD1331PinMOSI		= GPIO_MAKE_PIN(HW_GPIOA, 8),
 	kSSD1331PinSCK		= GPIO_MAKE_PIN(HW_GPIOA, 9),
-	kSSD1331PinCSn		= GPIO_MAKE_PIN(HW_GPIOB, 13),
+	kSSD1331PinCSn		= GPIO_MAKE_PIN(HW_GPIOB, 10),
 	kSSD1331PinDC		= GPIO_MAKE_PIN(HW_GPIOA, 12),
-	kSSD1331PinRST		= GPIO_MAKE_PIN(HW_GPIOB, 0),
+	kSSD1331PinRST		= GPIO_MAKE_PIN(HW_GPIOA, 2),
 };
 
 static int
@@ -77,16 +77,16 @@ devSSD1331init(void)
 	PORT_HAL_SetMuxMode(PORTA_BASE, 8u, kPortMuxAlt3);
 	PORT_HAL_SetMuxMode(PORTA_BASE, 9u, kPortMuxAlt3);
 
-	enableSPIpins();
+	warpEnableSPIpins();
 
 	/*
 	 *	Override Warp firmware's use of these pins.
 	 *
 	 *	Reconfigure to use as GPIO.
 	 */
-	PORT_HAL_SetMuxMode(PORTB_BASE, 13u, kPortMuxAsGpio);
+	PORT_HAL_SetMuxMode(PORTB_BASE, 10u, kPortMuxAsGpio);
 	PORT_HAL_SetMuxMode(PORTA_BASE, 12u, kPortMuxAsGpio);
-	PORT_HAL_SetMuxMode(PORTB_BASE, 0u, kPortMuxAsGpio);
+	PORT_HAL_SetMuxMode(PORTA_BASE, 2u, kPortMuxAsGpio);
 
 
 	/*
@@ -160,9 +160,19 @@ devSSD1331init(void)
 	/*
 	 *	Any post-initialization drawing commands go here.
 	 */
-	//...
 
-
+	//draw a green rectangle covering the screen
+	writeCommand(kSSD1331CommandDRAWRECT);
+	writeCommand(0x00);//start col
+	writeCommand(0x0);//start row
+	writeCommand(95u);//end col
+	writeCommand(63u);//end row
+	writeCommand(0u);//outline colour
+	writeCommand(63u);
+	writeCommand(0u);
+	writeCommand(0u);//fill colour
+	writeCommand(63u);
+	writeCommand(0u);
 
 	return 0;
 }

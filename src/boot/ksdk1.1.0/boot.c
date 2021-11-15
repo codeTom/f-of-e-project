@@ -83,6 +83,11 @@
 	volatile WarpSPIDeviceState			deviceISL23415State;
 #endif
 
+#if (WARP_BUILD_ENABLE_DEVSSD1331)
+	#include "devSSD1331.h"
+	//volatile WarpSPIDeviceState			deviceSSD1331State;
+#endif
+
 #if (WARP_BUILD_ENABLE_DEVAT45DB)
 	#include "devAT45DB.h"
 	volatile WarpSPIDeviceState			deviceAT45DBState;
@@ -175,6 +180,7 @@
 	#include "devBGX.h"
 	volatile WarpUARTDeviceState			deviceBGXState;
 #endif
+
 
 
 volatile i2c_master_state_t				i2cMasterState;
@@ -1606,7 +1612,7 @@ main(void)
 
 	#if (WARP_BUILD_ENABLE_DEVMMA8451Q)
 //		initMMA8451Q(	0x1C	/* i2cAddress */,	&deviceMMA8451QState,		kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
-		initMMA8451Q(	0x1C	/* i2cAddress */,		kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
+		initMMA8451Q(	0x1D	/* i2cAddress */,		kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
 	#endif
 
 	#if (WARP_BUILD_ENABLE_DEVLPS25H)
@@ -2015,6 +2021,10 @@ main(void)
 			}
 			warpPrint("Should not get here...");
 		}
+	#endif
+
+	#if (WARP_BUILD_ENABLE_DEVSSD1331)
+		devSSD1331init();
 	#endif
 
 	while (1)
