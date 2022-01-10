@@ -244,7 +244,7 @@ bool TPM_DRV_PwmStart(uint8_t instance, tpm_pwm_param_t *param, uint8_t channel)
     uint16_t uMod, uCnv;
 
     assert(instance < HW_TPM_INSTANCE_COUNT);
-    assert(param->uDutyCyclePercent <= 100);
+    assert(param->uDutyCyclePercent <= 100000);
     assert(channel < FSL_FEATURE_TPM_CHANNEL_COUNTn(instance));
 
     uint32_t tpmBaseAddr = g_tpmBaseAddr[instance];
@@ -266,7 +266,7 @@ bool TPM_DRV_PwmStart(uint8_t instance, tpm_pwm_param_t *param, uint8_t channel)
     {
         case kTpmEdgeAlignedPWM:
             uMod = freq / param->uFrequencyHZ - 1;
-            uCnv = uMod * param->uDutyCyclePercent / 100;
+            uCnv = uMod * param->uDutyCyclePercent / 100000;
             /* For 100% duty cycle */
             if(uCnv >= uMod)
             {
@@ -277,7 +277,7 @@ bool TPM_DRV_PwmStart(uint8_t instance, tpm_pwm_param_t *param, uint8_t channel)
             break;
         case kTpmCenterAlignedPWM:
             uMod = freq / (param->uFrequencyHZ * 2);
-            uCnv = uMod * param->uDutyCyclePercent / 100;
+            uCnv = uMod * param->uDutyCyclePercent / 100000;
             /* For 100% duty cycle */
             if(uCnv >= uMod)
             {

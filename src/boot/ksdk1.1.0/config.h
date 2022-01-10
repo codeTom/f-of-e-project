@@ -53,6 +53,7 @@
  *	KL03 to manually set this here.
  */
 #define		WARP_BUILD_ENABLE_FRDMKL03			1
+#define		WARP_BUILD_ENABLE_DEVSSD1331	1
 
 /*
  *	Force the required configuration if WARP_BUILD_ENABLE_GLAUX_VARIANT is set
@@ -101,7 +102,7 @@
 	#define		WARP_BUILD_ENABLE_DEVSI4705		0
 	#define		WARP_BUILD_ENABLE_DEVSI7021		0
 	#define		WARP_BUILD_ENABLE_DEVTCS34725		0
-	#define		WARP_BUILD_ENABLE_DEVSSD1331	1
+
 #else
 	/*
 	 *	Otherwise: Edit these to set which code paths are activated in the firmware compilation
@@ -162,27 +163,4 @@ typedef enum
 	 *	Voltages
 	 */
 	kWarpDefaultSupplyVoltageMillivolts			= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsBGX			= 3300,
-	kWarpDefaultSupplyVoltageMillivoltsBMX055accel		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsBMX055gyro		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsBMX055mag		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsMMA8451Q		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsLPS25H		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsHDC1000		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsMAG3110		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsSI7021		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsL3GD20H		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsBME680		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsTCS34725		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsSI4705		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsCCS811		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsAMG8834		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsAS7262		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsAS7263		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsRV8803C7		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsADXL362		= 2400,
-	kWarpDefaultSupplyVoltageMillivoltsIS25xP		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsISL23415		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsAT45DB		= 1800,
-	kWarpDefaultSupplyVoltageMillivoltsICE40		= 1800,
 } WarpDefaults;
