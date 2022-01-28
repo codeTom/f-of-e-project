@@ -22,7 +22,10 @@ bool vl53_init()
 	/* Set 2v8 mode */
 	uint8_t vhv_config_scl_sda = 0;
 	if (!i2c_read_addr8_data8(VL53_REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV, &vhv_config_scl_sda))
+	{
+		warpPrint("Cannot find VL53!");
 		return false;
+	}
 
 	vhv_config_scl_sda |= 0x01;
 	if (!i2c_write_addr8_data8(VL53_REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV, vhv_config_scl_sda))
@@ -44,10 +47,16 @@ bool vl53_init()
 		return false;
 
 	if (!vl53_load_default_tuning_settings())
+	{
+		warpPrint("Failed to load default settings");
 		return false;
+	}
 
 	if (!vl53_configure_interrupt())
+	{
+		warpPrint("Failed to configure interupt");
 		return false;
+	}
 
 	if (!vl53_set_sequence_steps_enabled(RANGE_SEQUENCE_STEP_DSS +
 										 RANGE_SEQUENCE_STEP_PRE_RANGE +
