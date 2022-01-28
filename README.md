@@ -1,8 +1,11 @@
 # Time of flight sensor based 3D mapper
+## About
+This project builds a slow 3D lidar alternative using 2 servos and a time of flight sensor.
+
 ## Firmware
 The firmware is based on a stripped down version of [Warp-firmware](https://github.com/physical-computation/Warp-firmware), source can be found in src.
 ### Servo control
-Servo driver can control 2 servos, see `src/boot/ksdk1.1.0/devServos.h` for more details. To allow higher resolution for PWM control, the default PWM driver was modified and now uses 1000ths of percents instead of percents for duty cycle.
+Servo driver can control 2 servos, see `src/boot/ksdk1.1.0/devServos.{h,c}` for more details. To allow higher resolution for PWM control, the default PWM driver was modified and now uses 1/1000 percent instead of percent for duty cycle unit.
 
 ### Distance sensor
 A basic VL53L0X V2 driver is implemented in `src/boot/ksdk1.1.0/devVL53.{c,h}` based on [this post](https://www.artfulbytes.com/vl53l0x-post).
